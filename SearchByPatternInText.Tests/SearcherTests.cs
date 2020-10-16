@@ -1,4 +1,7 @@
+using System;
 using NUnit.Framework;
+
+#pragma warning disable CA1707
 
 namespace SearchByPatternInText.Tests
 {
@@ -39,9 +42,23 @@ namespace SearchByPatternInText.Tests
             "Letraset sheets containinig Lorem Ipsum passages, and more recently with desktop publishing " +
             "software like Aldus PageMaker including versions of Lorem Ipsum.",
             "ini", true, ExpectedResult = new[] {339, 341, 442, 444})]
-        public int[] SearchPatternString(string text, string pattern, bool behind)
+        public int[] SearchPatternString_Tests(string text, string pattern, bool behind)
         {
             return text.SearchPatternString(pattern, behind);
+        }
+
+        [Test]
+        public void SearchPatternString_TextIsNull_ThrowArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => Searcher.SearchPatternString(null, "pattern", false),
+                "Source string cannot be null.");
+        }
+
+        [Test]
+        public void SearchPatternString_PatternIsNull_ThrowArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => "source text".SearchPatternString(null, false),
+                "Source string cannot be null.");
         }
     }
 }
