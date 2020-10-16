@@ -58,7 +58,7 @@ namespace SearchByPatternInText.Tests
         public void SearchPatternString_PatternIsNull_ThrowArgumentException()
         {
             Assert.Throws<ArgumentException>(() => "source text".SearchPatternString(null, false),
-                "Source string cannot be null.");
+                "Pattern string cannot be null.");
         }
     }
 }
